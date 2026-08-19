@@ -1,25 +1,116 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#6c63ff"><link rel="manifest" href="manifest.json"><title>Olympiad Quest</title>
+<meta name="theme-color" content="#6c63ff"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon.svg">
+<title>Olympiad Quest</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f6ff;color:#26324a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:820px;margin:auto;padding:14px}.hero{background:linear-gradient(135deg,#e9e5ff,#e5f7ff);border-radius:28px;padding:22px;text-align:center}h1{margin:0;font-size:clamp(32px,8vw,48px)}.sub{color:#5f6980;margin:6px 0 15px}.stats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.pill{background:#fff;padding:9px 14px;border-radius:99px;font-weight:800}.card{background:#fff;border-radius:24px;padding:20px;margin-top:15px;box-shadow:0 4px 18px #1d294012}.subjects{display:flex;gap:8px;flex-wrap:wrap}.subject{border:0;border-radius:99px;padding:10px 14px;background:#eeeaff;font-weight:750}.progress{height:9px;background:#e7e9f1;border-radius:9px;overflow:hidden;margin:15px 0}.bar{height:100%;width:0;background:#6c63ff;transition:.25s}.question{font-size:clamp(23px,5vw,31px);font-weight:800;line-height:1.35;margin:18px 0}.option{width:100%;text-align:left;margin:7px 0;min-height:58px;padding:12px;border:2px solid #e2e6ef;border-radius:15px;background:#fff;font-size:18px;font-weight:750}.option.correct{background:#eaf8f1;border-color:#168a5b}.option.wrong{background:#fff0f2;border-color:#d94a5a}.next{width:100%;margin-top:12px;min-height:54px;border:0;border-radius:15px;background:#6c63ff;color:#fff;font-size:18px;font-weight:800}.feedback{margin-top:13px;padding:14px;border-radius:16px;background:#f0f1ff;font-size:17px;line-height:1.45}.small{font-size:14px;color:#6c7589}.hide{display:none}.level{font-weight:900;color:#554dd1}
+*{box-sizing:border-box}body{margin:0;background:#f5f6ff;color:#26324a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:850px;margin:auto;padding:14px}.hero{background:linear-gradient(135deg,#e9e5ff,#e5f7ff);border-radius:28px;padding:22px;text-align:center}
+h1{margin:0;font-size:clamp(32px,8vw,48px)}.sub{color:#5f6980;margin:6px 0 15px}.stats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.pill{background:#fff;padding:9px 14px;border-radius:99px;font-weight:800}.card{background:#fff;border-radius:24px;padding:20px;margin-top:15px;box-shadow:0 4px 18px #1d294012}
+.subjects,.sections{display:flex;gap:8px;flex-wrap:wrap}.subject,.section{border:0;border-radius:99px;padding:10px 14px;background:#eeeaff;font-weight:750}
+.section{background:#eef8f3}.section.active,.subject.active{background:#6c63ff;color:white}.sections{margin-top:12px}.sectionTitle{font-size:14px;font-weight:800;color:#657089;margin-top:12px}
+.progress{height:9px;background:#e7e9f1;border-radius:9px;overflow:hidden;margin:15px 0}.bar{height:100%;width:0;background:#6c63ff;transition:.25s}
+.question{font-size:clamp(23px,5vw,31px);font-weight:800;line-height:1.35;margin:18px 0}.option{width:100%;text-align:left;margin:7px 0;min-height:58px;padding:12px;border:2px solid #e2e6ef;border-radius:15px;background:#fff;font-size:18px;font-weight:750}
+.option.selected{background:#eeeaff;border-color:#6c63ff;transform:scale(1.01)}.option.correct{background:#eaf8f1;border-color:#168a5b}.option.wrong{background:#fff0f2;border-color:#d94a5a}.submit{width:100%;margin-top:12px;min-height:56px;border:0;border-radius:16px;background:#ff8a3d;color:white;font-size:19px;font-weight:900;box-shadow:0 4px 0 #d86622}.reaction{font-size:48px;text-align:center;margin:8px 0;animation:pop .35s ease}@keyframes pop{50%{transform:scale(1.3)}100%{transform:scale(1)}}.next{width:100%;margin-top:12px;min-height:54px;border:0;border-radius:15px;background:#6c63ff;color:#fff;font-size:18px;font-weight:800}
+.feedback{margin-top:13px;padding:14px;border-radius:16px;background:#f0f1ff;font-size:17px;line-height:1.45}.small{font-size:14px;color:#6c7589}.hide{display:none}.level{font-weight:900;color:#554dd1}
+
+.section-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px;align-items:start}
+.lesson{background:#f8f7ff;border:2px solid #e5e2ff;border-radius:20px;padding:17px;position:sticky;top:14px}
+.lesson h2{margin:0 0 8px;font-size:21px}.lesson .definition{font-size:16px;line-height:1.45;margin-bottom:10px}
+.lesson .examples{background:#fff;border-radius:14px;padding:11px;line-height:1.5}.lesson .tip{margin-top:10px;padding:10px;border-radius:12px;background:#fff3d9;font-size:14px}
+@media(max-width:720px){.section-layout{grid-template-columns:1fr}.lesson{position:static;order:-1}}
 </style></head><body><main>
-<section class="hero"><div class="small">STARTING AGE 5 • ADAPTIVE OLYMPIAD TRAINING</div><h1>🌟 Olympiad Quest</h1><div class="sub">Get it right → challenge rises. Miss it → we step down and teach.</div>
+<section class="hero"><div class="small">STARTING AGE 5 • ADAPTIVE OLYMPIAD TRAINING</div><h1>🌟 Olympiad Quest</h1><div class="sub">Correct → harder. Incorrect → easier + explanation.</div>
 <div class="stats"><span class="pill">⭐ <span id="stars">0</span></span><span class="pill">🧠 Level <span id="level">1</span></span><span class="pill">🔥 <span id="streak">0</span></span><span class="pill">🎯 <span id="accuracy">0%</span></span></div></section>
-<section class="card"><div class="subjects" id="subjects"></div><div class="small" style="margin-top:14px">Adaptive level <b class="level" id="difficulty">1</b> • Question <b id="number">1</b></div><div class="progress"><div class="bar" id="bar"></div></div><div class="question" id="question"></div><div id="options"></div><div class="feedback hide" id="feedback"></div><button class="next hide" id="next">Next Question →</button></section>
-</main><script src="questions.js"></script><script>
+<section class="card">
+<div class="subjects" id="subjects"></div><div id="sectionTitle" style="font-size:20px;font-weight:900;margin-top:14px">📚 Choose a topic</div><div class="sections" id="sections"></div><div class="small" style="margin-top:9px">🎯 Maximum 15 questions in any section</div>
+</div>
+<aside class="lesson" id="lesson">
+<h2>📘 Learn before you play</h2>
+<div class="definition">Choose a subject section to see a simple explanation, examples and a helpful tip.</div>
+</aside>
+</div>
+<div id="englishPanel" class="hide"><div class="sectionTitle">📚 English — Parts of Speech & Grammar</div><div id="sectionTitle" style="font-size:20px;font-weight:900;margin-top:14px">📚 Choose a topic</div><div class="sections" id="sections"></div><div class="small" style="margin-top:9px">🎯 Maximum 15 questions in any section</div>
+</div>
+<aside class="lesson" id="lesson">
+<h2>📘 Learn before you play</h2>
+<div class="definition">Choose a subject section to see a simple explanation, examples and a helpful tip.</div>
+</aside>
+</div></div>
+<div class="small" style="margin-top:14px"><span id="mode">Mixed</span> • Adaptive level <b class="level" id="difficulty">1</b> • Question <b id="number">1</b></div>
+<div class="progress"><div class="bar" id="bar"></div></div><div class="question" id="question"></div><div id="options"></div>
+<div class="feedback hide" id="feedback"></div><button class="next hide" id="next">Next Question →</button>
+</section></main><script src="questions.js"></script><script>
 const ICON={Math:"🔢",Science:"🔬",English:"🔤",GK:"🌍",Reasoning:"🧩",Mixed:"🏆"};
-let topic="Mixed",difficulty=1,quizIndex=0,score=0,stars=0,streak=0,attempts=0,correctTotal=0,locked=false;
+const ENGLISH=["Nouns","Pronouns","Verbs","Adjectives","Adverbs","Prepositions","Conjunctions","Interjections","Articles & Determiners","Sentence Skills"];
+let topic="Mixed",section="All",difficulty=1,quizIndex=0,stars=0,streak=0,attempts=0,correctTotal=0,locked=false;
 const $=x=>document.getElementById(x);
-function stats(){ $("stars").textContent=stars;$("streak").textContent=streak;$("level").textContent=difficulty;$("difficulty").textContent=difficulty;$("accuracy").textContent=attempts?Math.round(correctTotal/attempts*100)+"%":"0%" }
-function pool(){return QUESTIONS.filter(q=>(topic==="Mixed"||q.s===topic)&&q.d===difficulty)}
-function pick(){let p=pool();if(!p.length)p=QUESTIONS.filter(q=>topic==="Mixed"||q.s===topic);return p[Math.floor(Math.random()*p.length)]}
-function render(){locked=false;let q=pick();$("number").textContent=quizIndex+1;$("bar").style.width=Math.min(100,((quizIndex%10)/9)*100)+"%";$("question").textContent=q.q;$("feedback").classList.add("hide");$("next").classList.add("hide");$("options").innerHTML="";
-q.o.forEach((x,j)=>{let b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+j)+". "+x;b.onclick=()=>answer(j,q,b);$("options").appendChild(b)})}
-function answer(choice,q){if(locked)return;locked=true;attempts++;let ok=choice===q.a;document.querySelectorAll(".option").forEach((b,j)=>{if(j===q.a)b.classList.add("correct");if(j===choice&&!ok)b.classList.add("wrong")});
-if(ok){score++;correctTotal++;stars+=2;streak++;difficulty=Math.min(10,difficulty+1);$("feedback").innerHTML="<b>🌟 Correct!</b><br>"+q.e+"<br><b>Next challenge: Level "+difficulty+"</b>"}else{streak=0;difficulty=Math.max(1,difficulty-1);$("feedback").innerHTML="<b>💡 Good try!</b><br>Correct answer: <b>"+q.o[q.a]+"</b><br>"+q.e+"<br><b>We’ll step down to Level "+difficulty+" and build you back up.</b>"}quizIndex++;$("feedback").classList.remove("hide");$("next").classList.remove("hide");stats()}
+function stats(){$("stars").textContent=stars;$("streak").textContent=streak;$("level").textContent=difficulty;$("difficulty").textContent=difficulty;$("accuracy").textContent=attempts?Math.round(correctTotal/attempts*100)+"%":"0%"}
+function filtered(){return QUESTIONS.filter(q=>(topic==="Mixed"||q.s===topic)&&(topic!=="English"||section==="All"||q.p===section)&&q.d===difficulty)}
+function pick(){let p=filtered();if(!p.length)p=QUESTIONS.filter(q=>(topic==="Mixed"||q.s===topic)&&(topic!=="English"||section==="All"||q.p===section));return p[Math.floor(Math.random()*p.length)]}
+function render(){locked=false;selectedAnswer=null;let q=pick();currentQ=q;$("submit").disabled=false;$("submit").style.opacity="1";$("number").textContent=(quizIndex%MAX_QUESTIONS_PER_SECTION)+1;$("sectionLimit").textContent=MAX_QUESTIONS_PER_SECTION;$("bar").style.width=((quizIndex%10)/9*100)+"%";$("question").textContent=q.q;$("mode").textContent=topic==="English"?(section==="All"?"English • All sections":"English • "+section):topic;$("feedback").classList.add("hide");$("next").classList.add("hide");$("options").innerHTML="";
+q.o.forEach((x,j)=>{let b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+j)+". "+x;b.onclick=()=>answer(j,q);$("options").appendChild(b)})}
+function selectAnswer(choice){
+  if(locked)return;
+  selectedAnswer=choice;
+  document.querySelectorAll(".option").forEach((b,j)=>b.classList.toggle("selected",j===choice));
+}
+function answer(choice,q){
+ if(locked)return;
+ locked=true;
+ $("submit").disabled=true;
+ $("submit").style.opacity=".55";
+ attempts++;
+ let ok=choice===q.a;
+document.querySelectorAll(".option").forEach((b,j)=>{if(j===q.a)b.classList.add("correct");if(j===choice&&!ok)b.classList.add("wrong")});
+if(ok){correctTotal++;stars+=2;streak++;difficulty=Math.min(10,difficulty+1);$("feedback").innerHTML="<b>🌟 Correct!</b><br>"+q.e+"<br><b>Next challenge: Level "+difficulty+"</b>"}else{streak=0;difficulty=Math.max(1,difficulty-1);$("feedback").innerHTML="<b>💡 Good try!</b><br>Correct answer: <b>"+q.o[q.a]+"</b><br>"+q.e+"<br><b>We’ll step down to Level "+difficulty+" and build you back up.</b>"}quizIndex++;$("feedback").classList.remove("hide");$("next").classList.remove("hide");stats()}
 $("next").onclick=()=>render();
-function start(t){topic=t;difficulty=1;quizIndex=0;score=0;render();stats()}
-["Mixed","Math","Science","English","GK","Reasoning"].forEach(s=>{let b=document.createElement("button");b.className="subject";b.textContent=ICON[s]+" "+s;b.onclick=()=>start(s);$("subjects").appendChild(b)});
+function start(t,s="All"){topic=t;section=s;difficulty=1;quizIndex=0;$("englishPanel").classList.toggle("hide",t!=="English");document.querySelectorAll(".subject").forEach(b=>b.classList.toggle("active",b.dataset.s===t));document.querySelectorAll(".section").forEach(b=>b.classList.toggle("active",b.dataset.p===s));render();stats()}
+ENGLISH.forEach(p=>{let b=document.createElement("button");b.className="section";b.dataset.p=p;b.textContent=p;b.onclick=()=>start("English",p);$("sections").appendChild(b)});
+
+
+const LESSONS={"India & Culture":{icon:"\ud83c\uddee\ud83c\uddf3",def:"India & Culture covers our country's history, symbols, traditions, places and everyday culture.",ex:["national symbols", "festivals", "monuments"],tip:"Think about the example and choose the safest or most sensible answer."},"World Around Us":{icon:"\ud83c\udf0d",def:"Learn about countries, continents, oceans, landmarks and our amazing world.",ex:["continents", "oceans", "landmarks"],tip:"Think about the example and choose the safest or most sensible answer."},"Science & Nature GK":{icon:"\ud83c\udf3f",def:"Discover everyday science and fascinating facts about nature and our planet.",ex:["plants", "animals", "Earth"],tip:"Think about the example and choose the safest or most sensible answer."},"Animals":{icon:"\ud83d\udc3e",def:"Explore animals, their homes, features, groups and amazing abilities.",ex:["mammals", "birds", "habitats"],tip:"Think about the example and choose the safest or most sensible answer."},"Space":{icon:"\ud83d\ude80",def:"Learn about the Sun, Moon, planets, stars and our solar system.",ex:["planets", "stars", "the Moon"],tip:"Think about the example and choose the safest or most sensible answer."},"Sports":{icon:"\u26bd",def:"Learn fun facts about sports, games, teams, equipment and famous competitions.",ex:["football", "cricket", "Olympics"],tip:"Think about the example and choose the safest or most sensible answer."},"Books & Stories":{icon:"\ud83d\udcda",def:"Explore famous characters, authors, books and the basic language of stories.",ex:["characters", "authors", "story types"],tip:"Think about the example and choose the safest or most sensible answer."},"Inventions & Technology":{icon:"\ud83d\udca1",def:"Learn about useful inventions, machines, devices and technology around us.",ex:["computers", "cameras", "GPS"],tip:"Think about the example and choose the safest or most sensible answer."},"Environment":{icon:"\ud83c\udf31",def:"Learn how to care for Earth, save resources, reduce waste and protect nature.",ex:["recycling", "trees", "renewable energy"],tip:"Think about the example and choose the safest or most sensible answer."},"Health & Safety":{icon:"\u2764\ufe0f",def:"Learn simple, age-appropriate facts about healthy habits and staying safe.",ex:["healthy food", "hand washing", "road safety"],tip:"Think about the example and choose the safest or most sensible answer."},
+"Nouns":{icon:"📚",def:"A noun is a naming word. It names a person, place, animal or thing.",ex:["👧 person: Riya","🏫 place: school","🐶 animal: dog","📚 thing: book"],tip:"Tip: If you can name it, it may be a noun."},
+"Pronouns":{icon:"👤",def:"A pronoun is a word used instead of a noun.",ex:["Riya is happy → She is happy.","The boys run → They run.","The dog is small → It is small."],tip:"Tip: Common pronouns include I, you, he, she, it, we and they."},
+"Verbs":{icon:"🏃",def:"A verb is an action or doing word. It tells what someone or something does.",ex:["run","jump","eat","write"],tip:"Tip: Ask, “What is the person or thing doing?”"},
+"Adjectives":{icon:"🎨",def:"An adjective describes a noun. It can tell us what something looks, feels or sounds like.",ex:["a red ball","a tall boy","a soft pillow","a happy child"],tip:"Tip: Adjectives add detail to nouns."},
+"Adverbs":{icon:"⚡",def:"An adverb gives more information about a verb. It often tells how, when or where an action happens.",ex:["runs quickly","speaks softly","arrived early"],tip:"Tip: Ask “How?”, “When?” or “Where?” about the action."},
+"Prepositions":{icon:"📍",def:"A preposition shows the relationship between words, often describing place, time or direction.",ex:["on the table","under the chair","before lunch","towards home"],tip:"Tip: Look for words showing where or when something is."},
+"Conjunctions":{icon:"🔗",def:"A conjunction joins words, phrases or sentences.",ex:["Riya and Sam","tea or juice","I ran because I was late."],tip:"Tip: Common conjunctions include and, but, or, because and so."},
+"Interjections":{icon:"🎉",def:"An interjection is a short word or phrase that expresses a strong feeling.",ex:["Wow!","Oh!","Hurray!","Oops!"],tip:"Tip: Interjections often use an exclamation mark."},
+"Articles & Determiners":{icon:"🅰️",def:"Articles and determiners help us identify or describe nouns.",ex:["a cat","an apple","the sun","this book","those shoes"],tip:"Tip: A/an are used for one non-specific thing; the points to something specific."},
+"Sentence Skills":{icon:"✍️",def:"A sentence is a group of words that expresses a complete thought.",ex:["I like mangoes.","Where are you?","Please sit down."],tip:"Tip: Start sentences with a capital letter and use the correct ending punctuation."},
+"Number Sense":{icon:"🔢",def:"Number sense means understanding numbers, their size, order and relationships.",ex:["8 is greater than 5","20 comes after 19","10 has one ten"],tip:"Tip: Compare numbers by thinking about their value."},
+"Addition & Subtraction":{icon:"➕",def:"Addition combines amounts. Subtraction finds how much is left or the difference between amounts.",ex:["3 + 2 = 5","9 − 4 = 5","12 + 8 = 20"],tip:"Tip: Draw objects or use a number line when needed."},
+"Multiplication & Division":{icon:"✖️",def:"Multiplication is equal groups. Division shares a quantity into equal groups.",ex:["3 × 4 = 12","12 ÷ 3 = 4","4 groups of 5 = 20"],tip:"Tip: Think of multiplication as repeated addition."},
+"Geometry":{icon:"📐",def:"Geometry is the study of shapes, sizes, positions and space.",ex:["triangle: 3 sides","square: 4 equal sides","circle: no corners"],tip:"Tip: Count sides and corners carefully."},
+"Patterns":{icon:"🧩",def:"A pattern follows a rule that repeats or changes in a predictable way.",ex:["2, 4, 6, 8…","red, blue, red, blue…","5, 10, 15…"],tip:"Tip: Find the rule before choosing the next item."},
+"Word Problems":{icon:"📖",def:"A word problem describes a real-life situation using maths. First understand the story, then choose the operation.",ex:["3 bags × 4 apples = 12 apples","₹20 − ₹7 = ₹13 left"],tip:"Tip: Circle important numbers and ask what the question wants."},
+"Fractions":{icon:"🍕",def:"A fraction shows equal parts of a whole. The top number is the numerator and the bottom number is the denominator.",ex:["1/2 = one of two equal parts","3/4 = three of four equal parts"],tip:"Tip: The denominator tells how many equal parts there are."},
+"Measurement":{icon:"📏",def:"Measurement tells us how long, heavy, full or how much time something is.",ex:["10 cm long","2 kg heavy","1 litre","5 minutes"],tip:"Tip: Choose the unit that matches what you are measuring."},
+"Data Handling":{icon:"📊",def:"Data handling means collecting, reading and comparing information shown in tables, charts or graphs.",ex:["bar charts","pictographs","tally marks"],tip:"Tip: Read the labels and scale before answering."},
+"Olympiad Reasoning":{icon:"🏆",def:"Olympiad reasoning uses logic, patterns and careful thinking to solve unfamiliar problems.",ex:["find the missing number","spot the odd one out","follow a sequence"],tip:"Tip: Don't rush. Look for the rule first."}
+};
+const GK_FOCUSED_LESSONS={"Continents": {"icon": "🌎", "def": "Continents is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["How many continents are there?", "Which is the largest continent?", "Which is the smallest continent?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "Oceans & Seas": {"icon": "🌊", "def": "Oceans & Seas is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["Which is the largest ocean?", "Which ocean is south of India?", "Which ocean lies between Africa and the Americas?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "Capital Cities": {"icon": "🏙️", "def": "Capital Cities is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["What is the capital of India?", "What is the capital of France?", "What is the capital of Japan?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "Countries & Flags": {"icon": "🏳️", "def": "Countries & Flags is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["Which country has a maple leaf on its flag?", "Which country's flag has a red circle on white?", "Which country is famous for the Eiffel Tower?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "Landmarks & Wonders": {"icon": "🗿", "def": "Landmarks & Wonders is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["The Taj Mahal is in which city?", "The Eiffel Tower is in which city?", "The Great Wall is in which country?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "Mountains & Rivers": {"icon": "🏔️", "def": "Mountains & Rivers is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["Which is the highest mountain above sea level?", "The Ganga is a river in which country?", "The Nile is strongly associated with which country?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "Deserts & Climate": {"icon": "🏜️", "def": "Deserts & Climate is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["Which is the largest hot desert?", "The Sahara Desert is in which continent?", "The Thar Desert is mainly associated with India and which country?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "India Geography": {"icon": "🇮🇳", "def": "India Geography is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["Which is the capital of India?", "Which ocean lies south of India?", "Which mountain range is north of India?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "World Geography": {"icon": "🗺️", "def": "World Geography is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["Which country is the largest by land area?", "Which country is made up of many islands?", "Which continent is Brazil in?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}, "Time, Calendars & Directions": {"icon": "🧭", "def": "Time, Calendars & Directions is a focused General Knowledge topic. Learn the key facts, then test yourself.", "ex": ["How many days are in a week?", "How many months are in a year?", "Which direction does the Sun appear to rise from?"], "tip": "Read carefully, recall the key fact, and eliminate unlikely choices."}};function renderLesson(){
+ if(section && GK_FOCUSED_LESSONS[section]) LESSONS[section]=GK_FOCUSED_LESSONS[section];
+ const box=$("lesson");
+ if(!box)return;
+ if(!section){box.innerHTML='<h2>📘 Learn before you play</h2><div class="definition">Choose an English or Math section to see its definition, examples and a tip.</div>';return}
+ const L=LESSONS[section];
+ if(!L)return;
+ box.innerHTML='<h2>'+L.icon+' '+section+'</h2><div class="definition"><b>Definition</b><br>'+L.def+'</div><div class="examples"><b>Examples</b><br>• '+L.ex.join('<br>• ')+'</div><div class="tip"><b>💡 Smart Tip</b><br>'+L.tip+'</div>';
+}
+
+function renderSections(){
+  renderLesson();
+  const box=$("sections"); box.innerHTML="";
+  let sections=[];
+  if(topic==="Math") sections=[["Number Sense","🔢"],["Addition & Subtraction","➕"],["Multiplication & Division","✖️"],["Geometry","📐"],["Patterns","🧩"],["Word Problems","📖"],["Fractions","🍕"],["Measurement","📏"],["Data Handling","📊"],["Olympiad Reasoning","🏆"]];
+  if(topic==="GK") sections=[["Continents", "🌎"], ["Oceans & Seas", "🌊"], ["Capital Cities", "🏙️"], ["Countries & Flags", "🏳️"], ["Landmarks & Wonders", "🗿"], ["Mountains & Rivers", "🏔️"], ["Deserts & Climate", "🏜️"], ["India Geography", "🇮🇳"], ["World Geography", "🗺️"], ["Time, Calendars & Directions", "🧭"]];
+    if(topic==="English") sections=[["Nouns","📚"],["Pronouns","👤"],["Verbs","🏃"],["Adjectives","🎨"],["Adverbs","⚡"],["Prepositions","📍"],["Conjunctions","🔗"],["Interjections","🎉"],["Articles & Determiners","🅰️"],["Sentence Skills","✍️"]];
+  if(!sections.length)return;
+  sections.forEach(([name,icon])=>{let b=document.createElement("button");b.className="section";b.textContent=icon+" "+name;b.onclick=()=>start(topic,name);box.appendChild(b)});
+}
+["Mixed","Math","Science","English","GK","Reasoning"].forEach(s=>{let b=document.createElement("button");b.className="subject";b.dataset.s=s;b.textContent=ICON[s]+" "+s;b.onclick=()=>start(s);$("subjects").appendChild(b)});
 start("Mixed");
 </script></body></html>
