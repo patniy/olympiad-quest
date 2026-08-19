@@ -1,0 +1,17 @@
+{
+  "name": "Olympiad Quest - Age 7",
+  "short_name": "Olympiad Quest",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f7ff",
+  "theme_color": "#6c63ff",
+  "description": "Interactive Olympiad practice for 7-year-olds.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
