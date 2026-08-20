@@ -285,6 +285,13 @@ header h1{color:#22aaa0!important;font-size:42px!important;letter-spacing:-1px!i
 main.wrap,.assessment-strip{margin-left:122px!important;max-width:calc(100% - 140px)!important}
 @media(max-width:700px){.library-nav{width:76px!important;padding:12px 4px!important}.lib-tab{width:68px!important;min-width:68px!important;font-size:10px!important}.lib-icon{width:52px!important;height:52px!important;font-size:25px!important}main.wrap,.assessment-strip{margin-left:88px!important;max-width:calc(100% - 98px)!important}}
 </style>
+
+<style id="incorrect-red-assessment">
+.track-dot.incorrect{background:#ef6b6b!important;color:#fff!important;border:0!important}
+.track-dot.done{background:#55c97a!important;color:#fff!important}
+.assess-wrong{color:#df4f4f!important}
+.assess-correct{color:#329a59!important}
+</style>
 </head>
 <body><header><div class="actions"><button onclick="home()">🏠</button><button onclick="alert('🧒 Young Explorer! Keep learning and earning hearts ❤️')">🧒</button></div><h1>🚀 Olympiad Quest</h1><b>Learn • Play • Think • Improve</b></header>
 <div class="theme">🎨 Theme <select id="theme"><option value="space">🚀 Space Adventure</option><option value="jungle">🦁 Jungle Safari</option><option value="ocean">🐠 Underwater World</option><option value="fairy">🦄 Fairy Tale Land</option><option value="robot">🤖 Robot Future</option><option value="mountain">🏔️ Mountain Explorer</option></select></div>
@@ -413,7 +420,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 </script>
 <script>
 (function(){
-let answered=0,correct=0,streak=0;
+let answered=0,correct=0,streak=0,results=[];
 function draw(){
  const a=document.getElementById("assessAnswered"); if(!a)return;
  a.textContent=answered;
@@ -423,23 +430,30 @@ function draw(){
  document.getElementById("assessLevel").textContent="Level "+(typeof level==="number"?level:1);
  document.getElementById("assessStreak").textContent=streak;
  document.getElementById("assessAccuracyText").textContent=pct>=90?"Amazing! 🌟":pct>=75?"Great job! ⭐":pct>=50?"Keep going! 💪":"Let's learn together! 🌱";
- const t=document.getElementById("questionTrack");t.innerHTML="";
+ const t=document.getElementById("questionTrack"); t.innerHTML="";
  for(let n=1;n<=15;n++){
-  if(n>1){let l=document.createElement("div");l.className="track-line";t.appendChild(l)}
-  let d=document.createElement("div");d.className="track-dot"+(n<=answered?" done":"")+(n===answered+1?" current":"");d.textContent=n;t.appendChild(d)
+   if(n>1){let l=document.createElement("div");l.className="track-line";t.appendChild(l)}
+   let d=document.createElement("div"); d.className="track-dot";
+   if(results[n-1]===true)d.classList.add("done");
+   else if(results[n-1]===false)d.classList.add("incorrect");
+   else if(n===answered+1)d.classList.add("current");
+   d.textContent=n; t.appendChild(d);
  }
 }
 window.setAssessment=function(a,c,s){answered=a;correct=c;streak=s;draw()};
-window.resetAssessment=function(){answered=0;correct=0;streak=0;draw()};
+window.resetAssessment=function(){answered=0;correct=0;streak=0;results=[];draw()};
 document.addEventListener("DOMContentLoaded",()=>{
  draw();
  const submit=document.getElementById("submit");
- if(submit) submit.addEventListener("click",()=>{
+ if(submit)submit.addEventListener("click",()=>{
    if(submit.classList.contains("hidden"))return;
-   const opts=[...document.querySelectorAll(".option")], chosen=opts.findIndex(x=>x.classList.contains("sel"));
+   const opts=[...document.querySelectorAll(".option")],chosen=opts.findIndex(x=>x.classList.contains("sel"));
    if(chosen<0)return;
-   if(typeof DATA!=="undefined" && typeof subject!=="undefined" && typeof topic!=="undefined" && typeof i!=="undefined"){
-     const q=DATA.questions[subject][topic][i]; answered++; if(chosen===q.a){correct++;streak++}else streak=0; draw();
+   if(typeof DATA!=="undefined"&&typeof subject!=="undefined"&&typeof topic!=="undefined"&&typeof i!=="undefined"){
+     const q=DATA.questions[subject][topic][i],ok=chosen===q.a;
+     answered++;
+     if(ok){correct++;streak++;results[i]=true}else{streak=0;results[i]=false}
+     draw();
    }
  },true);
 });
