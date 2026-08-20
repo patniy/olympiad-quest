@@ -68,6 +68,7 @@ button.submit{background:var(--accent)}button.submit:hover,button.next:hover{tra
 .theme-btn.active{border-color:var(--primary);box-shadow:0 4px 0 var(--primary2);background:color-mix(in srgb,var(--primary) 10%,white)}
 .theme-icon{font-size:34px}.theme-name{font-size:12px;line-height:1.1}
 .theme-panel{max-width:1120px;margin:14px auto 0;padding:16px;background:rgba(255,255,255,.94);border:2px solid #fff;border-radius:26px;box-shadow:0 10px 26px #39345114;text-align:center}.theme-panel h2{margin:0 0 3px;font-size:23px}.theme-panel p{margin:0 0 12px;color:var(--muted);font-weight:700}.theme-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.theme-btn{border:3px solid #e7e8f1;background:#fff;border-radius:18px;padding:10px 7px;min-height:96px;cursor:pointer;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 4px 0 #e4e6ed;transition:.18s}.theme-btn.active{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 12%,white);box-shadow:0 4px 0 var(--primary2)}.theme-btn:hover{transform:translateY(-3px)}.theme-icon{font-size:34px}.theme-name{font-size:13px}.theme-panel{position:relative;z-index:5}
+.theme-bar{max-width:1120px;margin:12px auto 0;padding:10px 14px;background:rgba(255,255,255,.94);border:2px solid #fff;border-radius:18px;box-shadow:0 7px 18px #39345112;display:flex;align-items:center;justify-content:flex-end;gap:9px;position:relative;z-index:8}.theme-bar label{font-weight:900;color:var(--ink);font-size:15px}.theme-bar select{border:2px solid var(--primary2);background:#fff;border-radius:13px;padding:9px 34px 9px 12px;color:var(--ink);font-weight:900;font-size:14px;cursor:pointer;outline:none;min-width:215px}@media(max-width:520px){.theme-bar{margin:10px 10px 0;justify-content:space-between}.theme-bar select{min-width:0;flex:1;max-width:235px}}
 @media(max-width:850px){.subject-grid{grid-template-columns:repeat(3,1fr)}.topic-grid{grid-template-columns:repeat(3,1fr)}.game{grid-template-columns:1fr}.lesson{position:static;order:-1}}
 @media(max-width:520px){.theme-grid{grid-template-columns:repeat(3,1fr)}.subject-grid{grid-template-columns:repeat(2,1fr)}.topic-grid{grid-template-columns:repeat(2,1fr)}.subject{min-height:112px}.topic{min-height:105px}.subject-icon{font-size:43px}.topic-icon{font-size:40px}}
 </style>
@@ -99,6 +100,17 @@ button.submit{background:var(--accent)}button.submit:hover,button.next:hover{tra
 <p>🔥 Streak: <b id="profileStreak">0</b></p>
 <p>🎯 Accuracy: <b id="profileAccuracy">0%</b></p>
 <button id="closeProfile">Keep Learning 🚀</button>
+</div>
+<div class="theme-bar">
+<label for="themeSelect">🎨 Theme</label>
+<select id="themeSelect" aria-label="Choose pastel theme">
+<option value="space">🚀 Space Adventure</option>
+<option value="jungle">🦁 Jungle Safari</option>
+<option value="ocean">🐠 Underwater World</option>
+<option value="fairy">🦄 Fairy Tale Land</option>
+<option value="robot">🤖 Robot Future</option>
+<option value="mountain">🏔️ Mountain Explorer</option>
+</select>
 </div>
 <div class="wrap">
 <section class="card theme-card">
@@ -173,15 +185,10 @@ function applyTheme(key){
  renderThemes();
 }
 function renderThemes(){
- const box=$("themeGrid"); if(!box)return;
- box.innerHTML="";
- Object.entries(THEMES).forEach(([key,t])=>{
-  const b=document.createElement("button");
-  b.className="theme-btn"+(key===activeTheme?" active":"");
-  b.innerHTML='<span class="theme-icon">'+t.icon+'</span><span class="theme-name">'+t.name+'</span>';
-  b.onclick=()=>applyTheme(key);
-  box.appendChild(b);
- });
+ const sel=document.getElementById("themeSelect");
+ if(!sel)return;
+ sel.value=activeTheme;
+ sel.onchange=()=>applyTheme(sel.value);
 }
 const LESSONS={
 "Nouns":["📚","A noun is a naming word. It names a person, place, animal or thing.",["Riya — person","school — place","dog — animal","book — thing"],"Ask: Can I name it? It may be a noun."],
