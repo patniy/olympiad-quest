@@ -221,10 +221,70 @@ header>b{display:none}
  .library-nav{gap:8px}
  .lib-icon{width:62px;height:62px;font-size:29px}
 }
-</style></head>
+</style><style>
+/* Assessment dashboard */
+.assessment-strip{max-width:1080px;margin:10px auto 22px;padding:18px 20px;background:#fff;border:1px solid #edf0f5;border-radius:24px;box-shadow:0 8px 22px rgba(52,65,92,.08)}
+.assessment-top{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;align-items:center}
+.assess-item{padding:4px 22px;border-right:1px solid #edf0f5;min-height:78px}
+.assess-item:last-child{border-right:0}.assess-label{font-size:12px;font-weight:900;color:#7c879b;margin-bottom:6px;letter-spacing:.5px}
+.assess-value{font-size:25px;font-weight:950;color:#263b66}.assess-sub{font-size:12px;font-weight:800;color:#8c96a7;margin-top:4px}
+.assess-icon{font-size:34px;float:left;margin-right:10px}.accuracy-ring{width:58px;height:58px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-right:8px;background:conic-gradient(#55c97a 0 0%,#e9edf2 0 100%);position:relative;vertical-align:middle}
+.accuracy-ring:after{content:"";position:absolute;width:44px;height:44px;border-radius:50%;background:#fff}.accuracy-ring span{position:relative;z-index:1;font-size:12px;font-weight:950;color:#3d9c60}
+.level-pill{display:inline-block;padding:8px 14px;border-radius:14px;background:#e8f7e9;color:#3b9c59;font-size:20px;font-weight:950}.streak-value{color:#ed7b35!important}
+.question-track{margin-top:17px;display:flex;align-items:center;gap:4px}.track-line{height:5px;flex:1;background:#e8edf2;border-radius:8px}.track-dot{width:22px;height:22px;border-radius:50%;background:#f4f6f8;color:#8792a3;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex:none}.track-dot.done{background:#55c97a;color:#fff}.track-dot.current{background:#fff;border:2px solid #5aa8e8;color:#428dcc}
+@media(max-width:760px){.assessment-top{grid-template-columns:repeat(2,1fr)}.assess-item:nth-child(2){border-right:0}.assess-item{margin-bottom:10px}}
+</style>
+<style id="yuvaan-final-style">
+/* ===== Olympiad Quest: Yuvaan Library Dashboard ===== */
+body{background:#fbfcff!important}
+header{padding:16px 18px 8px!important;background:#fff!important;border-bottom:2px solid #edf1f6!important}
+header h1{color:#22aaa0!important;font-size:42px!important;letter-spacing:-1px!important}
+.actions{left:18px!important;right:18px!important;top:16px!important;justify-content:flex-start!important}
+.actions button:first-child{width:56px;height:56px;background:#5bbdb4!important;border:0!important}
+.actions button:last-child{display:none!important}
+.yuvaan-profile{
+ position:absolute;right:20px;top:10px;width:112px;text-align:center;cursor:pointer
+}
+.yuvaan-photo{
+ width:82px;height:82px;border-radius:18px;object-fit:cover;display:block;margin:auto;
+ border:4px solid #fff;box-shadow:0 4px 13px rgba(45,61,91,.18)
+}
+.yuvaan-name{font-size:20px;font-weight:950;color:#17376c;margin-top:4px}
+.library-nav{max-width:950px!important;margin:-2px auto 8px!important;padding-top:2px!important}
+.lib-tab{min-width:105px!important}
+.lib-icon{width:78px!important;height:78px!important;font-size:38px!important}
+.theme{display:none!important}
+
+.assessment-strip{
+ max-width:1080px!important;margin:12px auto 20px!important;border-radius:25px!important;
+ box-shadow:0 7px 22px rgba(44,65,100,.09)!important
+}
+.assess-value{color:#263b66!important}
+#home h2,#topicTitle{color:#17376c!important}
+#home h2:before{content:"🎒"!important}
+#subjects.grid,#topicGrid.grid{grid-template-columns:repeat(6,minmax(120px,1fr))!important;gap:13px!important}
+.choice{min-height:168px!important;border-radius:18px!important;padding:9px!important}
+.choice .big{height:105px!important;border-radius:11px!important;font-size:48px!important}
+.choice small:before{content:"⭐ ";color:#f5ad20}
+@media(max-width:900px){
+ #subjects.grid,#topicGrid.grid{grid-template-columns:repeat(4,1fr)!important}
+ .yuvaan-profile{right:10px}
+}
+@media(max-width:600px){
+ header h1{font-size:32px!important}
+ .yuvaan-photo{width:62px;height:62px}.yuvaan-profile{width:82px}.yuvaan-name{font-size:15px}
+ #subjects.grid,#topicGrid.grid{grid-template-columns:repeat(2,1fr)!important}
+}
+</style>
+</head>
 <body><header><div class="actions"><button onclick="home()">🏠</button><button onclick="alert('🧒 Young Explorer! Keep learning and earning hearts ❤️')">🧒</button></div><h1>🚀 Olympiad Quest</h1><b>Learn • Play • Think • Improve</b></header>
 <div class="theme">🎨 Theme <select id="theme"><option value="space">🚀 Space Adventure</option><option value="jungle">🦁 Jungle Safari</option><option value="ocean">🐠 Underwater World</option><option value="fairy">🦄 Fairy Tale Land</option><option value="robot">🤖 Robot Future</option><option value="mountain">🏔️ Mountain Explorer</option></select></div>
 
+
+<div class="yuvaan-profile" id="yuvaanProfile" title="Yuvaan's profile">
+  <img class="yuvaan-photo" src="yuvaan-profile.jpg" alt="Yuvaan">
+  <div class="yuvaan-name">Yuvaan</div>
+</div>
 <div class="library-nav" id="libraryNav">
   <button class="lib-tab active" data-subject="Math"><div class="lib-icon">🔢</div>Math</button>
   <button class="lib-tab" data-subject="English"><div class="lib-icon">🔤</div>English</button>
@@ -232,7 +292,13 @@ header>b{display:none}
   <button class="lib-tab" data-subject="Science"><div class="lib-icon">🔬</div>Science</button>
   <button class="lib-tab" data-subject="Reasoning"><div class="lib-icon">🧩</div>Logic +</button>
 </div>
-<main class="wrap"><section id="home" class="card"><h2>Choose Your Learning Adventure</h2><div id="subjects" class="grid"></div></section>
+<div id="assessmentStrip" class="assessment-strip">
+<div class="assessment-top">
+<div class="assess-item"><div class="assess-icon">🏆</div><div class="assess-label">YOUR PROGRESS</div><div class="assess-value"><span id="assessAnswered">0</span> <small style="font-size:15px;color:#8792a3">/ 15</small></div><div class="assess-sub">Questions Answered</div></div>
+<div class="assess-item"><div class="assess-label">ACCURACY</div><div><div class="accuracy-ring" id="accuracyRing"><span id="assessAccuracy">0%</span></div><span class="assess-sub" id="assessAccuracyText">Let's begin! ⭐</span></div></div>
+<div class="assess-item"><div class="assess-label">CURRENT LEVEL</div><div><span class="level-pill" id="assessLevel">Level 1</span></div><div class="assess-sub">Building Strong! 📈</div></div>
+<div class="assess-item"><div class="assess-label">STREAK</div><div class="assess-value streak-value">🔥 <span id="assessStreak">0</span></div><div class="assess-sub">Keep it up!</div></div>
+</div><div class="question-track" id="questionTrack"></div></div><main class="wrap"><section id="home" class="card"><h2>Choose Your Learning Adventure</h2><div id="subjects" class="grid"></div></section>
 <section id="topics" class="card hidden"><h2 id="topicTitle"></h2><div id="topicGrid" class="grid"></div></section>
 <section id="quiz" class="hidden"><div class="learning"><div class="card"><b id="qtopic"></b><span style="float:right" id="lev"></span><div class="bar"><div id="fill" class="fill"></div></div><p id="qn"></p><div id="question" class="question"></div><div id="options"></div><div id="feedback" class="feedback"></div><button id="submit" class="btn submit">Submit Answer 🚀</button><button id="next" class="btn hidden">Next Question ➜</button></div><aside id="lesson" class="lesson"></aside></div></section>
 <section id="result" class="card hidden"></section></main>
@@ -335,5 +401,45 @@ document.addEventListener("DOMContentLoaded",()=>{
     };
   }
 })();
+</script>
+<script>
+(function(){
+let answered=0,correct=0,streak=0;
+function draw(){
+ const a=document.getElementById("assessAnswered"); if(!a)return;
+ a.textContent=answered;
+ const pct=answered?Math.round(correct/answered*100):0;
+ document.getElementById("assessAccuracy").textContent=pct+"%";
+ document.getElementById("accuracyRing").style.background="conic-gradient(#55c97a "+pct+"%,#e9edf2 "+pct+"% 100%)";
+ document.getElementById("assessLevel").textContent="Level "+(typeof level==="number"?level:1);
+ document.getElementById("assessStreak").textContent=streak;
+ document.getElementById("assessAccuracyText").textContent=pct>=90?"Amazing! 🌟":pct>=75?"Great job! ⭐":pct>=50?"Keep going! 💪":"Let's learn together! 🌱";
+ const t=document.getElementById("questionTrack");t.innerHTML="";
+ for(let n=1;n<=15;n++){
+  if(n>1){let l=document.createElement("div");l.className="track-line";t.appendChild(l)}
+  let d=document.createElement("div");d.className="track-dot"+(n<=answered?" done":"")+(n===answered+1?" current":"");d.textContent=n;t.appendChild(d)
+ }
+}
+window.setAssessment=function(a,c,s){answered=a;correct=c;streak=s;draw()};
+window.resetAssessment=function(){answered=0;correct=0;streak=0;draw()};
+document.addEventListener("DOMContentLoaded",()=>{
+ draw();
+ const submit=document.getElementById("submit");
+ if(submit) submit.addEventListener("click",()=>{
+   if(submit.classList.contains("hidden"))return;
+   const opts=[...document.querySelectorAll(".option")], chosen=opts.findIndex(x=>x.classList.contains("sel"));
+   if(chosen<0)return;
+   if(typeof DATA!=="undefined" && typeof subject!=="undefined" && typeof topic!=="undefined" && typeof i!=="undefined"){
+     const q=DATA.questions[subject][topic][i]; answered++; if(chosen===q.a){correct++;streak++}else streak=0; draw();
+   }
+ },true);
+});
+})();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+ const p=document.getElementById("yuvaanProfile");
+ if(p)p.onclick=()=>alert("🌟 Yuvaan's Learning Profile\nKeep learning, keep exploring and collect more stars!");
+});
 </script>
 </body></html>
