@@ -1,12 +1,10 @@
-Elegant Kids UI update
-
-The questionnaire engine is unchanged. The visual layer now uses:
-- premium pastel cards
-- larger polished thumbnails/icons
-- softer shadows and borders
-- refined typography and spacing
-- subject-specific visual palettes
-- cleaner topic cards
-- more elegant quiz/option styling
-
-Upload this index.html in place of the current index.html.
+Updated visual design:
+- All subject/topic icons are square tiles.
+- Added theme-specific ambient animations:
+  Space: floating stars
+  Jungle: leaves
+  Ocean: bubbles/droplets
+  Fairy: sparkles/hearts
+  Robot: gears/circuit symbols
+  Mountain: snowflakes/crystals
+- Existing question engine remains unchanged.
