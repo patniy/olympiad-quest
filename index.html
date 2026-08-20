@@ -276,6 +276,15 @@ header h1{color:#22aaa0!important;font-size:42px!important;letter-spacing:-1px!i
  #subjects.grid,#topicGrid.grid{grid-template-columns:repeat(2,1fr)!important}
 }
 </style>
+
+<style id="left-section-nav">
+.library-nav{position:fixed!important;left:0!important;top:92px!important;bottom:0!important;width:104px!important;margin:0!important;padding:18px 8px!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:12px!important;overflow-y:auto!important;background:rgba(255,255,255,.97)!important;border-right:1px solid #e8edf3!important;box-shadow:4px 0 16px rgba(45,61,91,.06)!important;z-index:30!important}
+.lib-tab{min-width:82px!important;width:88px!important;padding:6px 3px!important;font-size:12px!important;flex:none!important}
+.lib-icon{width:62px!important;height:62px!important;margin:0 auto 5px!important;font-size:29px!important}
+.lib-tab.active:after{width:54px!important;margin:5px auto 0!important}
+main.wrap,.assessment-strip{margin-left:122px!important;max-width:calc(100% - 140px)!important}
+@media(max-width:700px){.library-nav{width:76px!important;padding:12px 4px!important}.lib-tab{width:68px!important;min-width:68px!important;font-size:10px!important}.lib-icon{width:52px!important;height:52px!important;font-size:25px!important}main.wrap,.assessment-strip{margin-left:88px!important;max-width:calc(100% - 98px)!important}}
+</style>
 </head>
 <body><header><div class="actions"><button onclick="home()">🏠</button><button onclick="alert('🧒 Young Explorer! Keep learning and earning hearts ❤️')">🧒</button></div><h1>🚀 Olympiad Quest</h1><b>Learn • Play • Think • Improve</b></header>
 <div class="theme">🎨 Theme <select id="theme"><option value="space">🚀 Space Adventure</option><option value="jungle">🦁 Jungle Safari</option><option value="ocean">🐠 Underwater World</option><option value="fairy">🦄 Fairy Tale Land</option><option value="robot">🤖 Robot Future</option><option value="mountain">🏔️ Mountain Explorer</option></select></div>
@@ -285,7 +294,7 @@ header h1{color:#22aaa0!important;font-size:42px!important;letter-spacing:-1px!i
   <img class="yuvaan-photo" src="yuvaan-profile.jpg" alt="Yuvaan">
   <div class="yuvaan-name">Yuvaan</div>
 </div>
-<div class="library-nav" id="libraryNav">
+<div class="library-nav" id="libraryNav"><div class="nav-title" style="font-size:10px;font-weight:950;color:#9aa3b2;writing-mode:vertical-rl;margin-bottom:4px">SUBJECTS</div>
   <button class="lib-tab active" data-subject="Math"><div class="lib-icon">🔢</div>Math</button>
   <button class="lib-tab" data-subject="English"><div class="lib-icon">🔤</div>English</button>
   <button class="lib-tab" data-subject="General Knowledge"><div class="lib-icon">🌍</div>World</button>
