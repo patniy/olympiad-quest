@@ -1,10 +1,8 @@
-Updated visual design:
-- All subject/topic icons are square tiles.
-- Added theme-specific ambient animations:
-  Space: floating stars
-  Jungle: leaves
-  Ocean: bubbles/droplets
-  Fairy: sparkles/hearts
-  Robot: gears/circuit symbols
-  Mountain: snowflakes/crystals
-- Existing question engine remains unchanged.
+Olympiad Quest now follows the attached Library-style design:
+- large friendly title
+- circular subject navigation row
+- active tab with pastel highlight
+- large rectangular thumbnail cards
+- section headings and generous whitespace
+- elegant pastel educational-app aesthetic
+- existing question engine and adaptive assessment retained
